@@ -1,0 +1,59 @@
+Storage {
+  Name = File
+  Address = <%= @storage['ipaddress'] %>
+  SDPort = 9103
+  Password = "<%= @sd_password %>"
+  Device = FileStorage
+  Media Type = File
+}
+
+Pool {
+  Name = Default
+  Pool Type = Backup
+  Storage = File
+  Recycle = no
+  Action On Purge = Truncate
+  AutoPrune = yes
+  Maximum Volume Jobs = 1
+  Use Volume Once = yes
+  Label Format = "${Job}-${Level}-${Year}${Month:p/2/0/r}${Day:p/2/0/r}-${Hour:p/2/0/r}${Minute:p/2/0/r}-${JobId}"
+}
+
+Pool {
+  Name = FullPool
+  Pool Type = Backup
+  Storage = File
+  Recycle = yes
+  Action On Purge = Truncate
+  AutoPrune = yes
+  Maximum Volume Jobs = 1
+  Use Volume Once = yes
+  Label Format = "${Job}-${Level}-${Year}${Month:p/2/0/r}${Day:p/2/0/r}-${Hour:p/2/0/r}${Minute:p/2/0/r}-${JobId}"
+  Volume Retention = <%= node['bacula']['full_backup_retention'] %>
+}
+
+Pool {
+  Name = IncrPool
+  Pool Type = Backup
+  Storage = File
+  Recycle = yes
+  Action On Purge = Truncate
+  AutoPrune = yes
+  Maximum Volume Jobs = 1
+  Use Volume Once = yes
+  Label Format = "${Job}-${Level}-${Year}${Month:p/2/0/r}${Day:p/2/0/r}-${Hour:p/2/0/r}${Minute:p/2/0/r}-${JobId}"
+  Volume Retention = <%= node['bacula']['incremental_backup_retention'] %>
+}
+
+Pool {
+  Name = DiffPool
+  Pool Type = Backup
+  Storage = File
+  Recycle = yes
+  Action On Purge = Truncate
+  AutoPrune = yes
+  Maximum Volume Jobs = 1
+  Use Volume Once = yes
+  Label Format = "${Job}-${Level}-${Year}${Month:p/2/0/r}${Day:p/2/0/r}-${Hour:p/2/0/r}${Minute:p/2/0/r}-${JobId}"
+  Volume Retention = <%= node['bacula']['differential_backup_retention'] %>
+}

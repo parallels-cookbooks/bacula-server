@@ -1,0 +1,9 @@
+{
+  "name": "storage.example.loc",
+  "chef_type": "node",
+  "json_class": "Chef::Node",
+  "run_list": ["role[bacula-storage]"],
+  "normal": {
+    "ipaddress": "172.16.20.12"
+  }
+}

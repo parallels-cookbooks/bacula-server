@@ -1,0 +1,54 @@
+Client {
+  Name = <%= @client['fqdn'] %>
+  Address = <%= @client['fqdn'] %>
+  FDPort = 9102
+  Catalog = MyCatalog
+  Password = "<%= @fd_password %>"
+  File Retention = 60 days
+  Job Retention = 6 months
+  AutoPrune = yes
+}
+
+<% @client['bacula']['client']['backups'].each do |backup| %>
+Schedule {
+  Name = "<%= @client['fqdn'] %>_<%= backup['name'] %>"
+  <% backup['run'].each do |run| %>
+  Run = <%= run %>
+  <% end %>
+}
+
+FileSet {
+  Name = "<%= @client['fqdn'] %>_<%= backup['name'] %>"
+  Include {
+    Options {
+      <% backup['options'].each do |option_name, option| %>
+      <%= option_name %> = <%= option %>
+      <% end %>
+    }
+    <% backup['files'].each do |file| %>
+    File = <%= file %>
+    <% end %>
+  }
+  <% if backup['exclude'] %>
+  Exclude {
+  <% backup['exclude'].each do |exclude| %>
+    File = <%= exclude %>
+  <% end %>
+  }
+  <% end %>
+}
+
+Job {
+  Name = "<%= @client['fqdn'] %>_<%= backup['name'] %>"
+  JobDefs = "DefaultJob"
+  Schedule = "<%= @client['fqdn'] %>_<%= backup['name'] %>"
+  Client = <%= @client['fqdn'] %>
+  FileSet = "<%= @client['fqdn'] %>_<%= backup['name'] %>"
+  <% if backup['prejob_script'] %>
+  Client Run Before Job = "<%= backup['prejob_script'] %>"
+  <% end %>
+  <% if backup['postjob_script'] %>
+  Client Run After Job = "<%= backup['postjob_script'] %>"
+  <% end %>
+}
+<% end %>

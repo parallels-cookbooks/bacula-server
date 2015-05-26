@@ -1,0 +1,35 @@
+{
+  "name": "client.example.loc",
+  "chef_type": "node",
+  "json_class": "Chef::Node",
+  "run_list": ["role[bacula-client]"],
+  "normal": {
+    "fqdn": "client.example.loc",
+    "ipaddress": "172.16.20.11",
+    "bacula": {
+      "client": {
+        "backups": [
+          {
+            "name": "test_files",
+            "run": [
+              "Full mon at 3:00",
+              "Incremental tue-sat at 3:00"
+            ],
+            "files": [
+              "/tmp"
+            ],
+            "prejob_script": null,
+            "postjob_script": null,
+            "exclude": [
+              "/tmp/kitchen"
+            ],
+            "options": {
+              "signature": "MD5",
+              "compression": "GZIP"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+Storage {
+  Name = backup-sd
+  SDPort = 9103
+  WorkingDirectory = "/var/spool/bacula"
+  Pid Directory = "/var/run"
+  Maximum Concurrent Jobs = 20
+}
+
+Director {
+  Name = <%= node['bacula']['director']['name'] %>
+  Password = "<%= @sd_password %>"
+}
+
+Device {
+  Name = FileStorage
+  Media Type = File
+  Archive Device = <%= node['bacula']['storage']['volumes_dir'] %>
+  Random Access = Yes;
+  AutomaticMount = yes;
+  RemovableMedia = no;
+  AlwaysOpen = no;
+  LabelMedia = yes;
+}
+
+Messages {
+  Name = Standard
+  director = backup-dir = all
+}
