@@ -36,6 +36,7 @@ default['bacula']['director']['clients_role'] = 'bacula-client'
 default['bacula']['director']['storage_role'] = 'bacula-storage'
 default['bacula']['director']['working_directory'] = '/var/spool/bacula'
 default['bacula']['director']['pid_directory'] = '/var/run'
+default['bacula']['director']['email_on_error'] = []
 
 # Bacula storage configuration
 default['bacula']['storage']['volumes_dir'] = '/srv/bacula'

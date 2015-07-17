@@ -34,6 +34,9 @@ Catalog {
 
 Messages {
   Name = Standard
+  <% unless node['bacula']['director']['email_on_error'].empty? %>
+  mail on error = <%= node['bacula']['director']['email_on_error'].join(', ') %> = all, !skipped, !terminate
+  <% end %>
   append = "/var/log/bacula/director.log" = all, !skipped
   catalog = all
 }

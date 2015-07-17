@@ -29,6 +29,7 @@ The attributes used in the recipes and in the templates.
 |node['bacula']['director']['storage_role']|The role's name, which used to search storage.|String|'bacula-storage'|
 |node['bacula']['director']['working_directory']|Location for bacula working directory.|String|'/var/spool/bacula'|
 |node['bacula']['director']['pid_directory']|Location for bacula pid directory.|String|'/var/run'|
+|node['bacula']['director']['email_on_error']|List of email addresses where will send notifications about broken backups.|Array|[]|
 |node['bacula']['storage']['volumes_dir']|Location where bacula keeps backups.|String|'/srv/bacula'|
 |node['bacula']['storage']['user']|The user under which the bacula-sd service is started|String|'bacula'|
 |node['bacula']['storage']['group']|The group under which the bacula-dir service is started|Stirng|'tape'|
