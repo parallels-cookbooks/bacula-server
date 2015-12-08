@@ -5,5 +5,6 @@
   "db_user": "bacula",
   "db_password": "password",
   "sd_password": "sd_password",
+  "fd_password": "fd_password",
   "console_password": "console_password"
 }

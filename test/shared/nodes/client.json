@@ -27,6 +27,23 @@
               "signature": "MD5",
               "compression": "GZIP"
             }
+          },
+          {
+            "name": "mysql",
+            "run": [
+              "Full mon at 3:00"
+            ],
+            "files": [
+              "/var/cache/backup/mysql.sql"
+            ],
+            "prejob_script": "/usr/bin/bacula/create_mysql",
+            "postjob_script": "/usr/bin/bacula/delete_mysql",
+            "exclude": null,
+            "options": {
+              "signature": "MD5",
+              "compression": "GZIP"
+            },
+            "bpipe": true
           }
         ]
       }

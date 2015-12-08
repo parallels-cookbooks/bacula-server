@@ -25,8 +25,12 @@ FileSet {
       <%= option_name %> = <%= option %>
       <% end %>
     }
-    <% backup['files'].each do |file| %>
+    <% if backup['bpipe'] %>
+    Plugin = "bpipe:<%= backup['files'].first %>:<%= backup['prejob_script'] %>:"
+    <% else %>
+      <% backup['files'].each do |file| %>
     File = <%= file %>
+      <% end %>
     <% end %>
   }
   <% if backup['exclude'] %>
@@ -44,11 +48,13 @@ Job {
   Schedule = "<%= @client['fqdn'] %>_<%= backup['name'] %>"
   Client = <%= @client['fqdn'] %>
   FileSet = "<%= @client['fqdn'] %>_<%= backup['name'] %>"
-  <% if backup['prejob_script'] %>
+  <% unless backup['bpipe'] %>
+    <% if backup['prejob_script'] %>
   Client Run Before Job = "<%= backup['prejob_script'] %>"
-  <% end %>
-  <% if backup['postjob_script'] %>
+    <% end %>
+    <% if backup['postjob_script'] %>
   Client Run After Job = "<%= backup['postjob_script'] %>"
+    <% end %>
   <% end %>
 }
 <% end %>
