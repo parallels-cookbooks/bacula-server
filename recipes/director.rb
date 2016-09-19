@@ -78,8 +78,8 @@ end
 if Chef::Config[:solo]
   Chef::Log.fatal('This recipe uses search. Chef Solo does not support search.')
 else
-  bacula_clients = search(:node, "role:#{node['bacula']['director']['clients_role']}")
-  bacula_storage = search(:node, "role:#{node['bacula']['director']['storage_role']}").first
+  bacula_clients = search(:node, node['bacula']['director']['client_search'])
+  bacula_storage = search(:node, node['bacula']['director']['storage_search']).first
 end
 
 fail 'Storage server not found' if bacula_storage.nil?

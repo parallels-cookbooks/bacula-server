@@ -8,19 +8,19 @@ provisioner:
   nodes_path: test/shared/nodes
 
 platforms:
-  - name: centos-6.6
+  - name: centos-6.7
 
 suites:
-  - name: director
-    run_list:
-      - recipe[bacula-server::director]
-    driver:
-      network:
-        - ["private_network", {ip: "172.16.20.10"}]
-
   - name: storage
     run_list:
       - recipe[bacula-server::storage]
     driver:
       network:
         - ["private_network", {ip: "172.16.20.12"}]
+
+  - name: director
+    run_list:
+      - recipe[bacula-server::director]
+    driver:
+      network:
+        - ["private_network", {ip: "172.16.20.10"}]

@@ -25,8 +25,8 @@ The attributes used in the recipes and in the templates.
 |node['bacula']['director']['name']|The director's name, which used to identify between services.|String|'bacula-dir'|
 |node['bacula']['director']['port']|The port on wich the director listens.|Integer|9101|
 |node['bacula']['director']['maximum_concurrent_jobs']|Attribute show how many concurrent jobs may be run at the same time.|Integer|20|
-|node['bacula']['director']['clients_role']|The role's name, which used to search clients.|String|'bacula-client'|
-|node['bacula']['director']['storage_role']|The role's name, which used to search storage.|String|'bacula-storage'|
+|node['bacula']['director']['client_search']|The search string, which will be used to search clients.|String|'role:bacula-client'|
+|node['bacula']['director']['storage_search']|The search string, which will be used to search the storage node.|String|'role:bacula-storage'|
 |node['bacula']['director']['working_directory']|Location for bacula working directory.|String|'/var/spool/bacula'|
 |node['bacula']['director']['pid_directory']|Location for bacula pid directory.|String|'/var/run'|
 |node['bacula']['director']['email_on_error']|List of email addresses where will send notifications about broken backups.|Array|[]|
@@ -74,4 +74,4 @@ Data bag example:
 
 Authors
 ---
-- Author:: Pavel Yudin (pyudin@parallels.com) 
+- Author:: Pavel Yudin (pyudin@parallels.com)

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'bacula-server::director' do
   it 'installs postgresql-server with 9.3 verison' do
-    expect(package('postgresql93-server')).to be_installed.with_version('9.3.6')
+    expect(package('postgresql93-server')).to be_installed.with_version('9.3')
   end
 
   it 'enables and runs postgresql' do
