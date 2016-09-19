@@ -31,7 +31,7 @@ describe 'bacula-server::director' do
                                  sd_password: 'sd_password',
                                  console_password: 'console_password'
                                }
-          )
+                              )
         server.create_node('storage', run_list: ['role[bacula-storage]'], automatic: { ipaddress: '10.10.10.10' })
         server.create_node('client', run_list: ['role[bacula-client]'], automatic: { ipaddress: '10.10.10.11', fqdn: 'client.example.loc' })
       end
@@ -111,7 +111,7 @@ describe 'bacula-server::director' do
                                  sd_password: 'sd_password',
                                  console_password: 'console_password'
                                }
-          )
+                              )
         server.create_node('storage', run_list: ['role[bacula-storage]'], automatic: { ipaddress: '10.10.10.10' })
         server.create_node('client', run_list: ['role[bacula-client]'], automatic: { ipaddress: '10.10.10.11', fqdn: 'client.example.loc' })
       end

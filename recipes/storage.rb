@@ -43,11 +43,11 @@ template '/etc/bacula/bacula-sd.conf' do
   owner 'root'
   group 'root'
   mode '0644'
-  variables(:sd_password => databag['sd_password'])
+  variables(sd_password: databag['sd_password'])
   notifies :restart, 'service[bacula-sd]'
 end
 
 service 'bacula-sd' do
-  supports :status => true, :restart => true, :reload => true
+  supports status: true, restart: true, reload: true
   action [:enable, :start]
 end

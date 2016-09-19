@@ -82,15 +82,15 @@ else
   bacula_storage = search(:node, node['bacula']['director']['storage_search']).first
 end
 
-fail 'Storage server not found' if bacula_storage.nil?
-fail 'You must have at least one configured client' if bacula_clients.empty?
+raise 'Storage server not found' if bacula_storage.nil?
+raise 'You must have at least one configured client' if bacula_clients.empty?
 
 template '/etc/bacula/conf.d/storage.conf' do
   source 'dir-storage.conf.erb'
   owner 'root'
   group 'root'
   mode '0644'
-  variables(:storage => bacula_storage, :sd_password => databag['sd_password'])
+  variables(storage: bacula_storage, sd_password: databag['sd_password'])
   notifies :restart, 'service[bacula-dir]'
 end
 
@@ -107,7 +107,7 @@ bacula_clients.each do |client|
     owner 'root'
     group 'root'
     mode '0644'
-    variables(:client => client, :fd_password => databag['fd_password'])
+    variables(client: client, fd_password: databag['fd_password'])
     notifies :restart, 'service[bacula-dir]'
   end
 end
@@ -123,6 +123,6 @@ template '/etc/bacula/bacula-dir.conf' do
 end
 
 service 'bacula-dir' do
-  supports :status => true, :restart => true, :reload => true
+  supports status: true, restart: true, reload: true
   action [:start, :enable]
 end

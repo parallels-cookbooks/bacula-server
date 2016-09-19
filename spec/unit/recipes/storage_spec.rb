@@ -31,7 +31,7 @@ describe 'bacula-server::storage' do
                                  sd_password: 'sd_password',
                                  console_password: 'console_password'
                                }
-          )
+                              )
       end
       runner.converge(described_recipe)
     end
